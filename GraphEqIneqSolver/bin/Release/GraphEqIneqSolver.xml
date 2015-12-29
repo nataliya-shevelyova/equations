@@ -1,0 +1,272 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+GraphEqIneqSolver
+</name>
+</assembly>
+<members>
+<member name="P:GraphEqIneqSolver.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.Eq1Select">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.Eq2Select">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqCos">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqCtg">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqExp">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqLinear">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqLog">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqMod">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSelect">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSin">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSquare">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSystemCtg">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSystemExp">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSystemLinear">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSystemLog">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSystemMod">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSystemSin">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqSystemTg">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.EqTg">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.Fx">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEq1Select">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEq2Select">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqCos1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqCos2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqCtg1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqCtg2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqExp1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqExp2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqLinear1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqLinear2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqLog1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqLog2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqMod1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqMod2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSelect">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSin1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSin2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSquare1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSquare2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemCos1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemCos2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemCtg1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemCtg2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemExp1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemExp2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemLinear1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemLinear2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemLog1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemLog2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemMod1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemMod2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemSin1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemSin2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemSquare1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemSquare2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemTg1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqSystemTg2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqTg1">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.InEqTg2">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.Paintbrush">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.RefreshArrow">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:GraphEqIneqSolver.My.Resources.Resources.Transparent">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="T:GraphEqIneqSolver.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+</members>
+</doc>

@@ -1,0 +1,16 @@
+﻿Imports GraphEqIneqSolver.Extenders
+Imports GraphEqIneqSolver.Data
+Imports GraphEqIneqSolver.Inequalities.Interfaces
+Imports GraphEqIneqSolver.Equations.Interfaces
+Imports System.Collections.ObjectModel
+Imports GraphEqIneqSolver.Functions.Interfaces
+Imports GraphEqIneqSolver.Utilities.Interfaces
+
+Namespace Inequalities.Classes.Wrapers
+	Public MustInherit Class SystemInequalityWrapper
+		Implements IInequality
+
+		
+
+	End Class
+End NameSpace

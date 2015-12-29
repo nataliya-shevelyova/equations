@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D1B4D4CA-9EBE-424E-83D4-7291084D4ED2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>GraphEqIneqSolver.My.MyApplication</StartupObject>
+    <RootNamespace>GraphEqIneqSolver</RootNamespace>
+    <AssemblyName>GraphEqIneqSolver</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>GraphEqIneqSolver.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>GraphEqIneqSolver.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>_Images\Paintbrush.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.Ribbon35">
+      <HintPath>..\Ribbon\Bin\System.Windows.Forms.Ribbon35.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\packages\ZedGraph.5.1.6\lib\net35-Client\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\InequalityType.vb" />
+    <Compile Include="Data\RegionType.vb" />
+    <Compile Include="Equations\Classes\CosEquation.vb" />
+    <Compile Include="Equations\Classes\Wrappers\EquationBase.vb" />
+    <Compile Include="Equations\Classes\Wrappers\SystemEquationWrapper.vb" />
+    <Compile Include="Extenders\ViewRangeProviderExt.vb" />
+    <Compile Include="Info.Designer.vb">
+      <DependentUpon>Info.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Info.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meny.Designer.vb">
+      <DependentUpon>Meny.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Meny.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Theory.Designer.vb">
+      <DependentUpon>Theory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Theory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Functions\Classes\Wrappers\AppendPointsFunctionWrapper.vb" />
+    <Compile Include="Functions\Classes\Wrappers\FunctionBase.vb" />
+    <Compile Include="Functions\Classes\Wrappers\SubFunctionWrapper.vb" />
+    <Compile Include="Functions\Classes\Wrappers\SystemInequalityFunctionWrapper.vb" />
+    <Compile Include="Functions\Classes\Wrappers\UndefinedRangeFunctionWrapper.vb" />
+    <Compile Include="Inequalities\Classes\CosInequality1.vb" />
+    <Compile Include="Inequalities\Classes\CosInequality2.vb" />
+    <Compile Include="Inequalities\Classes\CotInequality1.vb" />
+    <Compile Include="Inequalities\Classes\CotInequality2.vb" />
+    <Compile Include="Inequalities\Classes\ExpInequality2.vb" />
+    <Compile Include="Inequalities\Classes\LogInequality1.vb" />
+    <Compile Include="Inequalities\Classes\LogInequality2.vb" />
+    <Compile Include="Inequalities\Classes\SinInequality1.vb" />
+    <Compile Include="Inequalities\Classes\SinInequality2.vb" />
+    <Compile Include="Inequalities\Classes\TanInequality1.vb" />
+    <Compile Include="Inequalities\Classes\TanInequality2.vb" />
+    <Compile Include="Inequalities\Classes\Wrapers\InequalityWrapper.vb" />
+    <Compile Include="Inequalities\Classes\Wrapers\SystemInequalityWrapper.vb" />
+    <Compile Include="Utilities\Interfaces\IExpression.vb" />
+    <Compile Include="Extenders\ExpressionExt.vb" />
+    <Compile Include="Extenders\FunctionExt.vb" />
+    <Compile Include="Extenders\RegionTypeExt.vb" />
+    <Compile Include="Extenders\XRangeExt.vb" />
+    <Compile Include="Functions\Classes\Wrappers\InequalityFunctionWrapper.vb" />
+    <Compile Include="Functions\Classes\Wrappers\CompositeFunctionWrapperBase.vb" />
+    <Compile Include="Functions\Classes\Wrappers\ValueRangeFunctionWrapper.vb" />
+    <Compile Include="Functions\Classes\Wrappers\SplitFunctionWrapper.vb" />
+    <Compile Include="Functions\Classes\CosFunction.vb" />
+    <Compile Include="Equations\Classes\CotEquation.vb" />
+    <Compile Include="Functions\Classes\CotFunction.vb" />
+    <Compile Include="Equations\Classes\ExpEquation.vb" />
+    <Compile Include="Functions\Classes\ExpFunction.vb" />
+    <Compile Include="Functions\Classes\ConstFunction.vb" />
+    <Compile Include="Functions\Classes\LinearFunction.vb" />
+    <Compile Include="Equations\Classes\LinearEquation.vb" />
+    <Compile Include="Inequalities\Classes\ExpInequality1.vb" />
+    <Compile Include="Inequalities\Classes\LinearInequality1.vb" />
+    <Compile Include="Inequalities\Classes\LinearInequality2.vb" />
+    <Compile Include="Inequalities\Classes\ModInequality1.vb" />
+    <Compile Include="Inequalities\Classes\ModInequality2.vb" />
+    <Compile Include="Inequalities\Classes\SquareInequality1.vb" />
+    <Compile Include="Inequalities\Classes\SquareInequality2.vb" />
+    <Compile Include="Inequalities\Interfaces\IInequality.vb" />
+    <Compile Include="Utilities\Classes\Line.vb" />
+    <Compile Include="Equations\Classes\LogEquation.vb" />
+    <Compile Include="Functions\Classes\LogFunction.vb" />
+    <Compile Include="Equations\Classes\ModEquation.vb" />
+    <Compile Include="Functions\Classes\ModFunction.vb" />
+    <Compile Include="Equations\Classes\SinEquation.vb" />
+    <Compile Include="Functions\Classes\SinFunction.vb" />
+    <Compile Include="Equations\Classes\SquareEquation.vb" />
+    <Compile Include="Functions\Classes\SquareFunction.vb" />
+    <Compile Include="Equations\Classes\TanEquation.vb" />
+    <Compile Include="Functions\Classes\TanFunction.vb" />
+    <Compile Include="Utilities\Interfaces\IViewRangeProvider.vb" />
+    <Compile Include="ViewModels\Classes\EquationsSystemViewModel.vb" />
+    <Compile Include="ViewModels\Classes\EquationViewModel.vb" />
+    <Compile Include="Data\ViewRange.vb" />
+    <Compile Include="Data\XRange.vb" />
+    <Compile Include="Equations\Interfaces\IEquation.vb" />
+    <Compile Include="Functions\Interfaces\IFunction.vb" />
+    <Compile Include="Utilities\Interfaces\ILine.vb" />
+    <Compile Include="Utilities\Interfaces\IRenderEngine.vb" />
+    <Compile Include="ViewModels\Classes\InequalitiesSystemViewModel.vb" />
+    <Compile Include="ViewModels\Classes\InequalityViewModel.vb" />
+    <Compile Include="ViewModels\Interfaces\IViewModel.vb" />
+    <Compile Include="Utilities\Classes\RenderEngine.vb" />
+    <Compile Include="MainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.vb">
+      <DependentUpon>MainForm.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Extenders\DoubleExt.vb" />
+    <Compile Include="Extenders\EnumerableExt.vb" />
+    <Compile Include="Utilities\Screens.vb" />
+    <Compile Include="Extenders\StringExt.vb" />
+    <Compile Include="Extenders\ZedGraphControlExt.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Info.resx">
+      <DependentUpon>Info.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meny.resx">
+      <DependentUpon>Meny.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Theory.resx">
+      <DependentUpon>Theory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="_Images\Eq1Select.png" />
+    <None Include="_Images\Eq2Select.png" />
+    <Content Include="_Images\EqCos.png" />
+    <Content Include="_Images\EqCtg.png" />
+    <Content Include="_Images\EqExp.png" />
+    <Content Include="_Images\EqLinear.png" />
+    <Content Include="_Images\EqLog.png" />
+    <Content Include="_Images\EqMod.png" />
+    <None Include="_Images\EqSelect.png" />
+    <Content Include="_Images\EqSin.png" />
+    <None Include="_Images\EqSystemCtg.png" />
+    <None Include="_Images\EqSystemExp.png" />
+    <None Include="_Images\EqSystemLinear.png" />
+    <None Include="_Images\EqSystemLog.png" />
+    <None Include="_Images\EqSystemMod.png" />
+    <None Include="_Images\EqSystemSin.png" />
+    <None Include="_Images\EqSystemTg.png" />
+    <Content Include="_Images\EqTg.png" />
+    <None Include="_Images\Transparent.png" />
+    <None Include="_Images\InEqCos1.png" />
+    <None Include="_Images\InEqCos2.png" />
+    <None Include="_Images\InEqCtg1.png" />
+    <None Include="_Images\InEqCtg2.png" />
+    <None Include="_Images\InEqExp1.png" />
+    <None Include="_Images\InEqExp2.png" />
+    <None Include="_Images\InEqLinear1.png" />
+    <None Include="_Images\InEqLinear2.png" />
+    <None Include="_Images\InEqLog1.png" />
+    <None Include="_Images\InEqLog2.png" />
+    <None Include="_Images\InEqMod1.png" />
+    <None Include="_Images\InEqMod2.png" />
+    <None Include="_Images\InEqSin1.png" />
+    <None Include="_Images\InEqSin2.png" />
+    <None Include="_Images\InEqSquare1.png" />
+    <None Include="_Images\InEqSquare2.png" />
+    <None Include="_Images\InEqTg1.png" />
+    <None Include="_Images\InEqTg2.png" />
+    <None Include="_Images\InEq1Select.png" />
+    <None Include="_Images\InEq2Select.png" />
+    <None Include="_Images\InEqSelect.png" />
+    <None Include="_Images\InEqSystemCos1.png" />
+    <None Include="_Images\InEqSystemCos2.png" />
+    <None Include="_Images\InEqSystemCtg1.png" />
+    <None Include="_Images\InEqSystemCtg2.png" />
+    <None Include="_Images\InEqSystemExp1.png" />
+    <None Include="_Images\InEqSystemExp2.png" />
+    <None Include="_Images\InEqSystemLinear1.png" />
+    <None Include="_Images\InEqSystemLinear2.png" />
+    <None Include="_Images\InEqSystemLog1.png" />
+    <None Include="_Images\InEqSystemLog2.png" />
+    <None Include="_Images\InEqSystemMod1.png" />
+    <None Include="_Images\InEqSystemMod2.png" />
+    <None Include="_Images\InEqSystemSin1.png" />
+    <None Include="_Images\InEqSystemSin2.png" />
+    <None Include="_Images\InEqSystemSquare1.png" />
+    <None Include="_Images\InEqSystemSquare2.png" />
+    <None Include="_Images\InEqSystemTg1.png" />
+    <None Include="_Images\InEqSystemTg2.png" />
+    <Content Include="_Images\Paintbrush.ico" />
+    <None Include="_Images\RefreshArrow.png" />
+    <None Include="_Images\Fx.png" />
+    <None Include="_Images\EqSquare.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

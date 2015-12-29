@@ -1,0 +1,4 @@
+E:\Coding\Temp\GraphEqIneqSolver\Ribbon\Sources\System.Windows.Forms.Ribbon\bin\Release\System.Windows.Forms.Ribbon35.dll
+E:\Coding\Temp\GraphEqIneqSolver\Ribbon\Sources\System.Windows.Forms.Ribbon\bin\Release\System.Windows.Forms.Ribbon35.pdb
+E:\Coding\Temp\GraphEqIneqSolver\Ribbon\Sources\System.Windows.Forms.Ribbon\obj\Release\System.Windows.Forms.Ribbon35.dll
+E:\Coding\Temp\GraphEqIneqSolver\Ribbon\Sources\System.Windows.Forms.Ribbon\obj\Release\System.Windows.Forms.Ribbon35.pdb

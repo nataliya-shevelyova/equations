@@ -1,0 +1,343 @@
+﻿Imports System.Collections.ObjectModel
+Imports System.Drawing.Drawing2D
+Imports GraphEqIneqSolver.Data
+Imports GraphEqIneqSolver.Extenders
+Imports GraphEqIneqSolver.Utilities.Interfaces
+Imports GraphEqIneqSolver.Functions.Interfaces
+Imports ZedGraph
+
+Namespace Utilities.Classes
+
+	Public Class RenderEngine
+		Implements IRenderEngine
+
+		Private ReadOnly _graphControl As ZedGraphControl
+
+		Sub New(ByVal graphControl As ZedGraphControl)
+			_graphControl = graphControl
+		End Sub
+
+		Private Function GetLimits() As ViewRange
+
+			' Мінимальна та максимальна видими точки по осі X та Y
+			Dim xMax = _graphControl.GraphPane.XAxis.Scale.Max
+			Dim xMin = _graphControl.GraphPane.XAxis.Scale.Min
+			Dim yMax = _graphControl.GraphPane.YAxis.Scale.Max
+			Dim yMin = _graphControl.GraphPane.YAxis.Scale.Min
+
+			Dim yUnitsPerPixel = (yMax - yMin) / _graphControl.ChartHeight
+
+			' Вибрати yMin та yMax, так щоб вони знаходились у будь-якому випадку за видимою частиною графіку
+			' Висота екрану використовується через те, що користувач може "рухати" графік за допомогою Ctrl+Drag
+			yMax += Screens.Height * yUnitsPerPixel
+			yMin -= Screens.Height * yUnitsPerPixel
+
+			Return New ViewRange(xMin, xMax, yMin, yMax)
+
+		End Function
+
+		Private Function GetXUnitsPerPixel(ByVal limits As ViewRange) As Double
+			Return (limits.XMax - limits.XMin) / _graphControl.ChartWidth
+		End Function
+
+		Private Function GetYUnitsPerPixel(ByVal limits As ViewRange) As Double
+			Return (limits.YMax - limits.YMin) / _graphControl.ChartHeight
+		End Function
+
+		Private Function LimitY(ByVal y As Double, ByVal limits As ViewRange) As Double
+			Return Math.Max(Math.Min(y, limits.YMax), limits.YMin)
+		End Function
+
+		Private Sub ApplyStyle(ByVal curve As LineItem, ByVal width As Double, ByVal style As DashStyle)
+
+			curve.Line.IsAntiAlias = True
+			curve.Line.Width = width
+			curve.Symbol.IsVisible = False
+			curve.Symbol.Size = width
+			curve.Line.IsSmooth = True
+
+			If Not style = DashStyle.Solid Then
+				If style = DashStyle.Dash Then
+					curve.Line.Style = DashStyle.Custom
+					curve.Line.DashOn = 3
+					curve.Line.DashOff = 2
+				ElseIf style = DashStyle.Dot Then
+					curve.Line.Style = DashStyle.Custom
+					curve.Line.DashOn = 1
+					curve.Line.DashOff = 2
+				Else
+					curve.Line.Style = style
+				End If
+			End If
+
+		End Sub
+
+		Private Sub ApplyStyle(ByVal polyObj As PolyObj, ByVal points As ReadOnlyCollection(Of PointD), ByVal inequalityType As InequalityType, ByVal limits As ViewRange, ByVal name As String, ByVal color As Color)
+
+			polyObj.ZOrder = ZOrder.E_BehindCurves
+			polyObj.IsClippedToChartRect = True
+
+			Dim opaqueColor = color.FromArgb(255, color)
+			
+			Dim x = points(0).X
+			Dim yMin = Math.Min(points(0).Y, points(1).Y)
+			Dim yMax = Math.Max(points(0).Y, points(1).Y)
+			Dim numPoints As Integer = (yMax - yMin) / GetYUnitsPerPixel(limits) / 3
+			Dim yStep = (yMax - yMin) / (numPoints - 1) ' Розмір кроку по осі Y
+			Dim pointList = New PointPairList
+			For i = 0 To numPoints - 1
+				pointList.Add(x, yMin + i * yStep)
+			Next
+			_graphControl.GraphPane.AddCurve(name, pointList, opaqueColor, SymbolType.Circle)
+			Dim curve1 = CType(_graphControl.GraphPane.CurveList.Last(), LineItem)
+
+			Dim curve2 As LineItem = Nothing
+			Dim curve3 As LineItem = Nothing
+
+			If Not x.IsEqualTo(points.Last().X) Then
+
+				pointList = New PointPairList()
+				For Each p In points.Skip(1).Take(points.Count - 2)
+					pointList.Add(p.X, p.Y)
+				Next
+				_graphControl.GraphPane.AddCurve(Nothing, pointList, opaqueColor, SymbolType.Circle)
+				curve2 = CType(_graphControl.GraphPane.CurveList.Last(), LineItem)
+
+				pointList = New PointPairList()
+				Dim xMin = points(points.Count - 2).X
+				Dim xMax = points(points.Count - 1).X
+				yMin = Math.Min(points(points.Count - 1).Y, points(points.Count - 2).Y)
+				yMax = Math.Max(points(points.Count - 1).Y, points(points.Count - 2).Y)
+				numPoints = (yMax - yMin) / GetYUnitsPerPixel(limits) / 3
+				yStep = (yMax - yMin) / (numPoints - 1)	' Розмір кроку по осі Y
+				Dim xStep = (xMax - xMin) / (numPoints - 1)	' Розмір кроку по осі Y
+				For i = 0 To numPoints - 1
+					pointList.Add(xMin + i * xStep, yMin + i * yStep)
+				Next
+				_graphControl.GraphPane.AddCurve(Nothing, pointList, opaqueColor, SymbolType.Circle)
+				curve3 = CType(_graphControl.GraphPane.CurveList.Last(), LineItem)
+
+			End If
+
+			If Not inequalityType = inequalityType.LessOrEqual AndAlso Not inequalityType = inequalityType.GreaterOrEqual Then
+				ApplyStyle(curve1, 3, DashStyle.Dash)
+				If Not curve2 Is Nothing Then ApplyStyle(curve2, 3, DashStyle.Dash)
+				If Not curve3 Is Nothing Then ApplyStyle(curve3, 3, DashStyle.Dash)
+			Else
+				ApplyStyle(curve1, 3, DashStyle.Solid)
+				If Not curve2 Is Nothing Then ApplyStyle(curve2, 3, DashStyle.Solid)
+				If Not curve3 Is Nothing Then ApplyStyle(curve3, 3, DashStyle.Solid)
+			End If
+
+		End Sub
+
+		Private Sub PlotCurve(ByVal func As IFunction, ByVal name As String, ByVal color As Color, ByVal xRange As XRange, ByVal style As DashStyle)
+
+			Dim zedPoints = New PointPairList()
+			Dim limits = GetLimits()
+
+			' Вибрати число точок на графіку так, щоб кожен піксел на екрані мав свою точку
+			Dim numPoints As Integer = xRange.Size / GetXUnitsPerPixel(limits) / 2
+
+			' Заповниити xPoints та yPoints
+			Dim xStep = xRange.Size / (numPoints - 1) ' Розмір кроку по осі Х
+			For i = 0 To numPoints - 1
+				Dim x = xRange.Min + i * xStep
+				Dim y = func.GetY(x, xRange)
+				If y.IsNaN Then	' Не вважати NaN за коректне значення
+
+					If zedPoints.Any Then
+
+						' Додати криву
+						_graphControl.GraphPane.AddCurve(name, zedPoints, color, SymbolType.Circle)
+						ApplyStyle(_graphControl.GraphPane.CurveList.Last(), 3, style)
+
+						zedPoints = New PointPairList()
+						name = Nothing
+
+					End If
+
+				Else
+					y = LimitY(y, limits)
+					zedPoints.Add(x, y)
+				End If
+			Next
+
+			' Додати криву
+			If zedPoints.Any() Or Not name Is Nothing Then
+				_graphControl.GraphPane.AddCurve(name, zedPoints, color, SymbolType.Circle)
+				ApplyStyle(_graphControl.GraphPane.CurveList.Last(), 3, style)
+			End If
+
+		End Sub
+
+		Private Sub PlotPoints(ByVal func As IFunction, ByVal points As ReadOnlyCollection(Of Double), ByVal name As String, ByVal color As Color)
+
+			If Not points.Any Then Exit Sub
+
+			Dim zedPoints = New NoDupePointList()
+			Dim limits = GetLimits()
+
+			For Each x In points
+				Dim y = func.GetY(x)
+				If Not y.IsNaN Then	' Не вважати NaN за коректне значення
+					y = LimitY(y, limits)
+					zedPoints.Add(x, y)
+				End If
+			Next
+
+			' Додати "криву", сховати лінії, відображати лише точки
+			_graphControl.GraphPane.AddCurve(name, zedPoints, color, SymbolType.Star)
+			Dim curve = DirectCast(_graphControl.GraphPane.CurveList.Last(), LineItem)
+			curve.Line.IsVisible = False
+			curve.Symbol.IsAntiAlias = False
+			curve.Symbol.Fill.Color = color
+
+		End Sub
+
+		Public Sub PlotPoly(ByVal func As IFunction, ByVal inequalityType As InequalityType, ByVal name As String, ByVal color As Color, ByVal xRange As XRange)
+
+			Dim zedPoints = New List(Of PointD)()
+			Dim limits = GetLimits()
+
+			Dim infinity = Double.NegativeInfinity
+			If inequalityType = inequalityType.Greater Or inequalityType = inequalityType.GreaterOrEqual Then
+				infinity = Double.PositiveInfinity
+			End If
+			infinity = LimitY(infinity, limits)
+
+			' Вибрати число точок на графіку так, щоб кожен піксел на екрані мав свою точку
+			Dim numPoints As Integer = xRange.Size / GetXUnitsPerPixel(limits) / 2
+			Dim xMax = xRange.Min
+			Dim polyObj As PolyObj
+
+			' Заповниити xPoints та yPoints
+			Dim xStep = xRange.Size / (numPoints - 1) ' Розмір кроку по осі Х
+			For i = 0 To numPoints - 1
+
+				Dim x = xRange.Min + i * xStep
+				Dim y = func.GetY(x, xRange)
+
+				If y.IsNaN Then	' Не вважати NaN за коректне значення
+					If zedPoints.Any Then
+						zedPoints.Add(New PointD(xMax, infinity))
+						xMax = xRange.Min
+						polyObj = New PolyObj(zedPoints.ToArray, color, color)
+						_graphControl.GraphPane.GraphObjList.Add(polyObj)
+						ApplyStyle(polyObj, zedPoints.AsReadOnly, inequalityType, limits, name, color)
+						name = Nothing
+						zedPoints = New List(Of PointD)()
+					End If
+					Continue For
+				End If
+
+				If zedPoints.Count = 0 Then zedPoints.Add(New PointD(x, infinity))
+				xMax = Math.Max(x, xMax)
+				y = LimitY(y, limits)
+				zedPoints.Add(New PointD(x, y))
+
+			Next
+
+			If zedPoints.Any Then
+				zedPoints.Add(New PointD(xMax, infinity))
+				polyObj = New PolyObj(zedPoints.ToArray, color, color)
+				_graphControl.GraphPane.GraphObjList.Add(polyObj)
+				ApplyStyle(polyObj, zedPoints.AsReadOnly, inequalityType, limits, name, color)
+			End If
+
+		End Sub
+
+		Private Function PlotVerticalLine(ByVal func As IFunction, ByVal inequalityType As InequalityType, ByVal name As String, ByVal x As Double, ByVal color As Color) As Boolean
+
+			Dim limits = GetLimits()
+			Dim infinity = Double.NegativeInfinity
+			If inequalityType = inequalityType.Greater Or inequalityType = inequalityType.GreaterOrEqual Then
+				infinity = Double.PositiveInfinity
+			End If
+			infinity = LimitY(infinity, limits)
+
+			Dim y = func.GetY(x)
+
+			If Not y.IsNaN Then	' Не вважати NaN за коректне значення
+				y = LimitY(y, limits)
+				Dim lineXPoints = New Double() {x, x}
+				Dim lineYPoints = New Double() {y, infinity}
+				_graphControl.GraphPane.AddCurve(name, lineXPoints, lineYPoints, color.FromArgb(255, color))
+				ApplyStyle(_graphControl.GraphPane.CurveList.Last(), 3.0, DashStyle.Solid)
+				Return True
+			End If
+
+			Return False
+
+<<<<<<< local
+			Next
+
+			For Each point In zedPoints
+				Dim lineXPoints = New Double() {point.X, point.X}
+				Dim lineYPoints = New Double() {point.Y, infinity}
+				_graphControl.GraphPane.AddCurve(name, lineXPoints, lineYPoints, color)
+				Dim curve = CType(_graphControl.GraphPane.CurveList.Last(), LineItem)
+				ApplyStype(curve, width, style)
+				curve.Symbol.IsVisible = True
+			Next
+
+		End Sub
+
+=======
+		End Function
+		
+>>>>>>> other
+		Public Sub PlotFunction(ByVal func As IFunction, ByVal name As String, ByVal color As Color, ByVal xRange As XRange, Optional ByVal style As DashStyle = DashStyle.Solid) Implements IRenderEngine.PlotFunction
+
+			Dim ranges = func.GetRanges(xRange)
+			Dim xPoints = New List(Of Double)
+
+			For Each range In From t In ranges
+			 Where Not t.Min.IsNaN And Not t.Min.IsInfinity And
+			 Not t.Max.IsNaN And Not t.Max.IsInfinity
+
+				' Крива або точка?
+				If Not range.Size.IsZero Then
+					PlotCurve(func, name, color, range, style)
+					name = Nothing
+				Else
+					xPoints.Add(range.Min)
+				End If
+
+			Next
+
+			xPoints.Sort()
+			PlotPoints(func, xPoints.AsReadOnly, name, color)
+
+		End Sub
+		
+		Private Sub FillRegion(ByVal func As IFunction, ByVal inequalityType As InequalityType, ByVal name As String, ByVal color As Color, ByVal xRange As XRange) Implements IRenderEngine.FillRegion
+
+			Dim ranges = (From t In func.GetRanges(xRange)
+			 Where Not t.Min.IsNaN And Not t.Min.IsInfinity And
+			 Not t.Max.IsNaN And Not t.Max.IsInfinity
+			 Order By t.Min).ToList.AsReadOnly
+
+			Dim xPoints = New List(Of Double)
+			For i = 0 To ranges.Count - 1
+				Dim range = ranges(i)
+				While i < ranges.Count - 1 AndAlso _
+				 (inequalityType = inequalityType.LessOrEqual Or inequalityType = inequalityType.GreaterOrEqual) AndAlso _
+				 range.Max.IsEqualTo(ranges(i + 1).Min)
+					range = New XRange(range.Min, ranges(i + 1).Max)
+					i = i + 1
+				End While
+				If range.Size.IsZero Then
+					xPoints.Add(range.Min)
+					If PlotVerticalLine(func, inequalityType, name, range.Min, color) Then name = Nothing
+				Else
+					PlotPoly(func, inequalityType, name, color, range)
+					name = Nothing
+				End If
+			Next
+			
+		End Sub
+
+	End Class
+
+End Namespace
